@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: darkgreen;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  color: lightgreen;
+  text-align: center;
+  margin: 8px;
+}
+
+canvas {
+  border: 8px solid green;
+}
