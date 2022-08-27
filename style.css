@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: darkgreen;
+  background: darkslategray;
 }
 
 .main-container {
@@ -12,11 +12,40 @@ body {
 }
 
 header {
-  color: lightgreen;
+  color: lightgray;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
   text-align: center;
+  margin: 0;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  background: black;
+  margin: 0;
+  padding: 8px;
+  padding-top: 16px;
+  width: 800px;
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  background: black;
+  color: lightgray;
+  border: none;
+  padding: 24px;
   margin: 8px;
 }
 
+button:hover {
+  background: lightgray;
+  color: black;
+}
+
 canvas {
-  border: 8px solid green;
+  border: 8px solid black;
 }
