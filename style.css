@@ -54,13 +54,13 @@ canvas {
   font-family: "Courier New", Courier, monospace;
   font-size: 24px;
   color: lightgray;
+  background: black;
   width: 800px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: black;
-  padding: 8px;
 }
 
 .bottom select {
