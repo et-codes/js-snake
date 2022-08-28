@@ -126,6 +126,7 @@ const updateScore = () => {
   const spanHighScore = document.getElementById('high-score');
   spanScore.textContent = `Score: ${score}`;
   spanHighScore.textContent = `High Score: ${highScore}`;
+  localStorage.highScore = highScore;
 }
 
 const setSpeed = (event) => {
@@ -166,6 +167,8 @@ const loopGame = () => {
 }
 
 const startGame = () => {
+  highScore = localStorage.getItem("highScore");
+  if (highScore === null) highScore = 0;
   getApplePosition();
   window.addEventListener('keydown', handleKeys);
   const buttonRestart = document.getElementById('restart');

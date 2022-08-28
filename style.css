@@ -67,3 +67,24 @@ canvas {
   font-size: 20px;
   background: lightgray;
 }
+
+.signature {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 48px;
+  color: lightgray;
+}
+
+.signature img {
+  scale: 0.75;
+  transform: rotate(-360deg);
+  transition: transform 0.5s;
+  vertical-align: middle;
+}
+
+.signature img:hover {
+  transform: rotate(360deg);
+  transition: transform 0.5s;
+}
