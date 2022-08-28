@@ -4,11 +4,11 @@ const WIDTH = 800;
 const HEIGHT = 600;
 const MAX_X = WIDTH / SIZE;
 const MAX_Y = HEIGHT / SIZE;
-const FPS = 10;
+const FPS = 15;
 let score = 0;
 let highScore = 0;
-let intervalId;
 let gameOver = false;
+let intervalId;
 
 // Set up the canvas
 const canvasElement = document.getElementById('canvas')
@@ -23,7 +23,7 @@ const snake = [{
   dx: 0,
   dy: 0
 }];
-const head = snake[0];
+let head = snake[0];
 const apple = { x: 0, y: 0 };
 
 const getApplePosition = () => {
@@ -75,17 +75,13 @@ const handleKeys = (event) => {
 }
 
 const moveSnake = () => {
-  const oldPosition = { x: head.x, y: head.y };
-  head.x += head.dx;
-  head.y += head.dy;
+  const newHead = { ...head, x: head.x, y: head.y };
+  newHead.x += newHead.dx;
+  newHead.y += newHead.dy;
 
-  for (i = 1; i < snake.length; i++) {
-    const olderPosition = { x: snake[i].x, y: snake[i].y };
-    snake[i].x = oldPosition.x;
-    snake[i].y = oldPosition.y;
-    oldPosition.x = olderPosition.x;
-    oldPosition.y = olderPosition.y;
-  }
+  snake.splice(0, 0, newHead);
+  snake.pop();
+  head = snake[0];
 }
 
 const checkCollisions = () => {
