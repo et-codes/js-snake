@@ -34,18 +34,36 @@ header {
 button {
   font-family: "Courier New", Courier, monospace;
   font-size: 24px;
-  background: black;
-  color: lightgray;
+  background: lightgray;
+  color: black;
   border: none;
-  padding: 24px;
+  padding: 16px;
   margin: 8px;
+  margin-left: 16px;
 }
 
 button:hover {
-  background: lightgray;
-  color: black;
+  background: darkgray;
 }
 
 canvas {
   border: 8px solid black;
+}
+
+.bottom {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  color: lightgray;
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: black;
+  padding: 8px;
+}
+
+.bottom select {
+  font-size: 20px;
+  background: lightgray;
 }

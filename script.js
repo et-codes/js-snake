@@ -4,7 +4,7 @@ const WIDTH = 800;
 const HEIGHT = 600;
 const MAX_X = WIDTH / SIZE;
 const MAX_Y = HEIGHT / SIZE;
-const FPS = 15;
+let FPS = 15;
 let score = 0;
 let highScore = 0;
 let gameOver = false;
@@ -126,7 +126,26 @@ const updateScore = () => {
   document.getElementById('high-score').textContent = `High Score: ${highScore}`;
 }
 
+const setSpeed = (event) => {
+  switch (event.target.value) {
+    case 'slow':
+      FPS = 10;
+      break;
+    case 'medium':
+      FPS = 15;
+      break;
+    case 'fast':
+      FPS = 20;
+      break;
+    case 'insane':
+      FPS = 25;
+  }
+  clearInterval(intervalId);
+  intervalId = setInterval(loopGame, (1000 / FPS));
+}
+
 const resetGame = () => {
+  clearInterval(intervalId);
   score = 0;
   snake.splice(1);
   head.x = Math.floor(WIDTH / SIZE / 2);
@@ -147,7 +166,8 @@ const loopGame = () => {
 const startGame = () => {
   getApplePosition();
   window.addEventListener('keydown', handleKeys);
-  document.getElementById('play-again').addEventListener('click', resetGame);
+  document.getElementById('restart').addEventListener('click', resetGame);
+  document.getElementById('speed').addEventListener('change', setSpeed);
   intervalId = setInterval(loopGame, (1000 / FPS));
 }
 
