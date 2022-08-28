@@ -122,8 +122,10 @@ const renderGameOver = () => {
 
 const updateScore = () => {
   if (score > highScore) highScore = score;
-  document.getElementById('score').textContent = `Score: ${score}`;
-  document.getElementById('high-score').textContent = `High Score: ${highScore}`;
+  const spanScore = document.getElementById('score');
+  const spanHighScore = document.getElementById('high-score');
+  spanScore.textContent = `Score: ${score}`;
+  spanHighScore.textContent = `High Score: ${highScore}`;
 }
 
 const setSpeed = (event) => {
@@ -166,8 +168,10 @@ const loopGame = () => {
 const startGame = () => {
   getApplePosition();
   window.addEventListener('keydown', handleKeys);
-  document.getElementById('restart').addEventListener('click', resetGame);
-  document.getElementById('speed').addEventListener('change', setSpeed);
+  const buttonRestart = document.getElementById('restart');
+  const selectSpeed = document.getElementById('speed');
+  buttonRestart.addEventListener('click', resetGame);
+  selectSpeed.addEventListener('change', setSpeed);
   intervalId = setInterval(loopGame, (1000 / FPS));
 }
 
