@@ -8,7 +8,7 @@ _Play the classic game of Snake right in your browser!_
 
 Move the snake with your arrow keys. Use the speed selector to set the difficulty of the game.
 
-Each time your snake eats an "apple", it grows! Be careful not to run into the edge of the screen or into your own body, or the game will be over. The game keeps track of your highest score in local storage, so it persists between browser sessions.
+Each time your snake eats an "apple", it grows! Be careful not to run into the edge of the screen or into your own body, or the game will be over. The game keeps track of your highest score for each speed. High scores are saved in local storage, so they persist between browser sessions.
 
 This game was written with vanilla HTML, CSS, and JavaScript.
 
