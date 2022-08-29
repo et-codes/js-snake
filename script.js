@@ -18,8 +18,8 @@ const canvas = canvasElement.getContext('2d');
 
 // Create snake and apple objects
 const snake = [{
-  x: Math.floor(WIDTH / SIZE / 2),
-  y: Math.floor(HEIGHT / SIZE / 2),
+  x: Math.floor(MAX_X / 2),
+  y: Math.floor(MAX_Y / 2),
   dx: 0,
   dy: 0
 }];
@@ -27,8 +27,8 @@ let head = snake[0];
 const apple = { x: 0, y: 0 };
 
 const getApplePosition = () => {
-  apple.x = Math.floor(Math.random() * WIDTH / SIZE);
-  apple.y = Math.floor(Math.random() * HEIGHT / SIZE);
+  apple.x = Math.floor(Math.random() * MAX_X);
+  apple.y = Math.floor(Math.random() * MAX_Y);
   if (apple.x === head.x && apple.y === head.y) getApplePosition();
 }
 
@@ -79,7 +79,7 @@ const moveSnake = () => {
   newHead.x += newHead.dx;
   newHead.y += newHead.dy;
 
-  snake.splice(0, 0, newHead);
+  snake.unshift(newHead);
   snake.pop();
   head = snake[0];
 }
@@ -92,11 +92,9 @@ const checkCollisions = () => {
   }
 
   // Check if collided with self
-  for (let i = 1; i < snake.length; i++) {
-    if (head.x === snake[i].x && head.y === snake[i].y) {
-      endGame();
-      return;
-    }
+  if (snake.slice(1).some(tail => head.x === tail.x && head.y === tail.y)) {
+    endGame();
+    return;
   }
 
   // Check if collided with apple
@@ -151,8 +149,8 @@ const resetGame = () => {
   clearInterval(intervalId);
   score = 0;
   snake.splice(1);
-  head.x = Math.floor(WIDTH / SIZE / 2);
-  head.y = Math.floor(HEIGHT / SIZE / 2);
+  head.x = Math.floor(MAX_X / 2);
+  head.y = Math.floor(MAX_Y / 2);
   head.dx = 0;
   head.dy = 0;
   gameOver = false;
@@ -170,12 +168,13 @@ const startGame = () => {
   highScore = localStorage.getItem("highScore");
   if (highScore === null) highScore = 0;
   getApplePosition();
-  window.addEventListener('keydown', handleKeys);
-  const buttonRestart = document.getElementById('restart');
-  const selectSpeed = document.getElementById('speed');
-  buttonRestart.addEventListener('click', resetGame);
-  selectSpeed.addEventListener('change', setSpeed);
   intervalId = setInterval(loopGame, (1000 / FPS));
 }
+
+window.addEventListener('keydown', handleKeys);
+const buttonRestart = document.getElementById('restart');
+buttonRestart.addEventListener('click', resetGame);
+const selectSpeed = document.getElementById('speed');
+selectSpeed.addEventListener('change', setSpeed);
 
 startGame();

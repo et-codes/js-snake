@@ -19,6 +19,10 @@ header {
   margin: 0;
 }
 
+header h1 {
+  margin: 8px;
+}
+
 .scores {
   display: flex;
   justify-content: space-between;
@@ -37,9 +41,7 @@ button {
   background: lightgray;
   color: black;
   border: none;
-  padding: 16px;
-  margin: 8px;
-  margin-left: 16px;
+  padding: 8px;
 }
 
 button:hover {
@@ -48,6 +50,7 @@ button:hover {
 
 canvas {
   border: 8px solid black;
+  border-bottom: 0;
 }
 
 .bottom {
@@ -63,28 +66,9 @@ canvas {
   gap: 8px;
 }
 
-.bottom select {
+#speed {
   font-size: 20px;
+  padding: 4px;
   background: lightgray;
-}
-
-.signature {
-  align-items: center;
-  display: flex;
-  gap: 4px;
-  justify-content: center;
-  margin-top: 48px;
-  color: lightgray;
-}
-
-.signature img {
-  scale: 0.75;
-  transform: rotate(-360deg);
-  transition: transform 0.5s;
-  vertical-align: middle;
-}
-
-.signature img:hover {
-  transform: rotate(360deg);
-  transition: transform 0.5s;
+  margin-right: auto;
 }
