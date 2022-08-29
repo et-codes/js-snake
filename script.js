@@ -6,9 +6,13 @@ const MAX_X = WIDTH / SIZE;
 const MAX_Y = HEIGHT / SIZE;
 let FPS = 15;
 let score = 0;
-let highScore = 0;
+let highScores;
+let highScore;
 let gameOver = false;
 let intervalId;
+
+const speedSelector = document.getElementById('speed');
+let speed = speedSelector.value;
 
 // Set up the canvas
 const canvasElement = document.getElementById('canvas')
@@ -102,6 +106,7 @@ const checkCollisions = () => {
     score++;
     snake.push({ x: head.x, y: head.y });
     getApplePosition();
+    updateScore();
   }
 }
 
@@ -118,17 +123,38 @@ const renderGameOver = () => {
   canvas.fillText('GAME OVER', WIDTH / 2, HEIGHT / 2);
 }
 
+const getHighScore = () => {
+  const highScoresJSON = localStorage.getItem("highScores");
+  if (highScoresJSON !== null) {
+    highScores = JSON.parse(highScoresJSON);
+  } else {
+    highScores = {
+      slow: 0,
+      medium: 0,
+      fast: 0,
+      insane: 0
+    };
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  }
+  return highScores[speed];
+}
+
 const updateScore = () => {
-  if (score > highScore) highScore = score;
+  if (score > highScore) {
+    highScore = score;
+    highScores[speed] = highScore;
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  }
   const spanScore = document.getElementById('score');
   const spanHighScore = document.getElementById('high-score');
   spanScore.textContent = `Score: ${score}`;
   spanHighScore.textContent = `High Score: ${highScore}`;
-  localStorage.highScore = highScore;
 }
 
 const setSpeed = (event) => {
-  switch (event.target.value) {
+  clearInterval(intervalId);
+  speed = event.target.value;
+  switch (speed) {
     case 'slow':
       FPS = 10;
       break;
@@ -141,8 +167,7 @@ const setSpeed = (event) => {
     case 'insane':
       FPS = 25;
   }
-  clearInterval(intervalId);
-  intervalId = setInterval(loopGame, (1000 / FPS));
+  resetGame();
 }
 
 const resetGame = () => {
@@ -161,12 +186,11 @@ const loopGame = () => {
   moveSnake();
   checkCollisions();
   drawCanvas();
-  updateScore();
 }
 
 const startGame = () => {
-  highScore = localStorage.getItem("highScore");
-  if (highScore === null) highScore = 0;
+  highScore = getHighScore();
+  updateScore();
   getApplePosition();
   intervalId = setInterval(loopGame, (1000 / FPS));
 }
